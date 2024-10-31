@@ -87,14 +87,17 @@ public class Libros {
 
     @Override
     public String toString() {
-        return  "\n**************************"+
+        return "\n**************************" +
                 "\nLibro:" +
-                "\nTitulo:" + titulo +
-                "\nDescargas: " + descargas +
-                "\nAutores:" + autores +
-                "\nIdiomas: " + idioma +"\n"+
-                "**************************";
+                "\n  Titulo: " + titulo +
+                "\n  Descargas: " + descargas +
+                "\n  Autores: " + autores.stream()
+                .map(Autor::getNombre)
+                .collect(Collectors.joining(", ")) +
+                "\n  Idioma: " + idioma +
+                "\n**************************";
     }
+
 
 
 }

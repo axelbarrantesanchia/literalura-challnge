@@ -71,11 +71,13 @@ public class Autor {
         this.libro = libro;
     }
 
+    @Override
     public String toString() {
-        return "Autor:\n" +
-                "\nNombre: " + nombre +
-                "\nAño de Nacimiento: " + anioNacimiento +
-                "\nAño de Muerte: " + anioMuerte +
+        return "Autor:" +
+                "\n  Nombre: " + nombre +
+                "\n  Año de Nacimiento: " + anioNacimiento +
+                "\n  Año de Muerte: " + anioMuerte +
                 "\n";
     }
+
 }

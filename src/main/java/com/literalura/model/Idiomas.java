@@ -3,12 +3,12 @@ package com.literalura.model;
 import java.util.List;
 
 public enum Idiomas {
-    ENGLISH("en", "Inglés"),
+    ENGLISH("en", "Ingles"),
     FRANCE("fr", "Francés"),
     ESPANOL("es", "Español");
 
-    private final String idioma; // Código del idioma
-    private final String idiomasEspanol; // Nombre en español
+    private final String idioma;
+    private final String idiomasEspanol;
 
     Idiomas(String idioma, String idiomaEspanol) {
         this.idioma = idioma;
@@ -18,13 +18,14 @@ public enum Idiomas {
     public static Idiomas fromStrings(List<String> texts) {
         for (String text : texts) {
             for (Idiomas idioma : Idiomas.values()) {
-                if (idioma.idiomasEspanol.equalsIgnoreCase(text)) { // Busca por nombre en español
-                    return idioma; // Devuelve el objeto Idiomas en lugar del nombre
+                if (idioma.getCodigo().equalsIgnoreCase(text)) {
+                    return idioma;
                 }
             }
         }
         throw new IllegalArgumentException("Ninguna categoría encontrada en la lista: " + texts);
     }
+
 
     public String getCodigo() {
         return this.idioma;

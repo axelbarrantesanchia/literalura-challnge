@@ -22,17 +22,24 @@ public class Principal {
     public void muestraElMenu() {
         var opcion = -1;
         while (opcion != 0) {
-            var menu = """
-                    1 - Buscar libro por titulo
-                    2 - Buscar autor
-                    3 - Listar libros registrados
-                    4 - Listar autores registrados
-                    5 - Listar autores vivos en determinado año
-                    6 - Listar libros por idioma
-                    
-                    
-                    0 - Salir
-                    """;
+            var menu = "\n"+"""
+    ==========================================
+             Proyecto de Axel Barrantes
+    ==========================================
+
+    Seleccione una opción del menú:
+
+       1 - 📚 Buscar libro por título
+       2 - 👤 Buscar autor
+       3 - 📖 Listar libros registrados
+       4 - 👥 Listar autores registrados
+       5 - 🎂 Listar autores vivos en determinado año
+       6 - 🌐 Listar libros por idioma
+
+       0 - 🚪 Salir
+       
+    ==========================================
+""";
             System.out.println(menu);
             opcion = teclado.nextInt();
             teclado.nextLine();
@@ -77,12 +84,12 @@ public class Principal {
     }
 
     private void buscarLibroPorTitulo() {
+
         datosLibro = getDatosLibro();
         libros = datosLibro.stream()
                 .map(l -> new Libros(l))
                 .limit(1)
                 .collect(Collectors.toList());
-
 
         for (Libros libroNuevo : libros) {
 
@@ -91,12 +98,11 @@ public class Principal {
             if (libroGuardado.isEmpty()) {
 
                 libroRepository.save(libroNuevo);
-                System.out.println("Libro guardado: " + libroNuevo.toString());
+                System.out.println("\n"+"Libro guardado: " + libroNuevo.toString());
             } else {
 
                 Libros libroExistente = libroGuardado.get();
                 System.out.println(libroExistente.toString());
-
 
                 for (Autor autorNuevo : libroNuevo.getAutores()) {
                     boolean autorExists = libroExistente.getAutores().stream()
@@ -112,7 +118,6 @@ public class Principal {
             }
         }
     }
-
 
 
     private List<DatosLibro> getDatosAutores() {
@@ -139,12 +144,12 @@ public class Principal {
     }
 
     private void listarLibrosPorIdioma() {
-        System.out.println("Escriba el idioma de la serie que desea buscar (Ejemplo: ESPANOL): ");
+        System.out.println("Escriba el idioma de la serie que desea buscar (Ejemplo: es (Español), en (Ingles), fr(Frances): ");
         var idioma = teclado.nextLine().trim();
 
         try {
-            var categoria = Idiomas.fromStrings(Collections.singletonList(idioma));
 
+            var categoria = Idiomas.fromStrings(Collections.singletonList(idioma));
 
             List<Libros> librosPorIdioma = libroRepository.findByIdiomaContainsIgnoreCase(categoria.getCodigo());
 
@@ -154,6 +159,7 @@ public class Principal {
             System.out.println(e.getMessage());
         }
     }
+
 
 
     private void listarAutoresVivosEnDeterminadoAnio() {
